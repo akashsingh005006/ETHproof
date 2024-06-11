@@ -1,0 +1,31 @@
+// SPDX-License-Identifier: MIT 
+pragma solidity 0.8.7;
+
+//under createToken store public variable (store detail of token)
+contract CreateToken {
+    string public TokenName;
+    string public tokenSymbol; // token abbrivation
+  uint public  TotalSupply; 
+
+
+
+mapping(address => uint)  public balances;
+//constructor is used to initialisation of token informations
+constructor() {
+    TokenName="ETH Proof";
+    tokenSymbol="ETH";
+    TotalSupply=0;
+}
+
+function mint(address _addvalue,uint _amount) public {
+    TotalSupply =TotalSupply + _amount;
+    balances[_addvalue] += _amount;
+}
+
+function burn(address _addvalue,uint _amount) public {
+    if(balances[_addvalue] >= _amount) {
+        TotalSupply=TotalSupply - _amount;
+        balances[_addvalue] -= _amount; 
+    }
+}
+}
